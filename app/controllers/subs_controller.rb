@@ -22,11 +22,12 @@ class SubsController < ApplicationController
   end
 
   def create
-    @sub = Sub.new(sub_params)
+    @sub = current_user.subs.new(sub_params)
 
     if @sub.save
       redirect_to sub_url(@sub)
     else
+      flash.new[:notice] = @sub.errors.full_messages
       render :new
     end
   end
