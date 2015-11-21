@@ -2,6 +2,13 @@
 
 <%= @sub.description %>
 
+<ul>
+<% @posts.each do |post| %>
+  <li><%=link_to "#{post.title}", post_url(post)%></li>
+<% end %>
+</ul>
+
+
 <br><br>
 <%= button_to "Edit #{@sub.title}", edit_sub_url(@sub), method: :get %>
 <%= button_to "All subs", subs_url, method: :get %>

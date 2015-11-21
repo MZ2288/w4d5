@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
   has_many :subs,
     foreign_key: :moderator_id
 
+  has_many :posts,
+    foreign_key: :author_id
+
   validates :username, :password_digest, :session_token, presence: true
   validates :username, :session_token, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }

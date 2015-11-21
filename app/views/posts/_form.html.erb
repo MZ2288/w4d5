@@ -1,0 +1,37 @@
+<% action = post.persisted? ? post_url(post) : posts_url %>
+<% method = post.persisted? ? :patch : :post %>
+
+<form action="<%= action %>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="_method" value="<%= method %>">
+
+  <label for="post_title">Title</label>
+  <input type="text" name="post[title]" value="<%= post.title %>" id="post_title">
+  <br>
+  <br>
+  <label for="post_link">Link</label>
+  <input type="text" name="post[url]" value="<%= post.url %>" id="post_link">
+  <br>
+  <br>
+  <label for="post_content">Content</label>
+  <textarea
+    name="post[content]"
+    id="post_content"><%= post.content %></textarea>
+  <br>
+  <br>
+  <label for="post_sub">Sub</label>
+  <select name="post[sub_id]" id="post_sub">
+    <option></option>
+    <% subs.each do |sub| %>
+      <option
+        <%= sub.id == post.sub_id ? "selected" : "" %>
+        value="<%= sub.id %>">
+        <%= sub.title %>
+      </option>
+    <% end %>
+  </select>
+  <br>
+  <br>
+  </select>
+  <input type="submit" value="submit">
+</form>
