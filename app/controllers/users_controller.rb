@@ -1,13 +1,11 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-
     render :show
   end
 
   def new
     @user = User.new
-
     render :new
   end
 
@@ -16,7 +14,7 @@ class UsersController < ApplicationController
 
     if @user.save
       login_user!(@user)
-      redirect_to user_url(@user)
+      redirect_to subs_url
     else
       flash.now[:notice] = @user.errors.full_messages
       render :new
@@ -24,7 +22,6 @@ class UsersController < ApplicationController
   end
 
   private
-
   def user_params
     params.require(:user).permit(:username, :password)
   end

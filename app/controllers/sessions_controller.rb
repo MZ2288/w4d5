@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
       params[:user][:password]
     )
 
+    #Switch branches
     if user.nil?
       flash.now[:notice] = ["Incorrect Username or Password"]
       render :new

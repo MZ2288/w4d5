@@ -1,2 +1,7 @@
-<h1>Subs#show</h1>
-<p>Find me in app/views/subs/show.html.erb</p>
+<h1><%= @sub.title %></h1>
+
+<%= @sub.description %>
+
+<br><br>
+<%= button_to "Edit #{@sub.title}", edit_sub_url(@sub), method: :get %>
+<%= button_to "All subs", subs_url, method: :get %>

@@ -17,7 +17,7 @@ class SubsController < ApplicationController
   end
 
   def edit
-    @sub = current_user.subs.find(params[:id])
+    @sub = Sub.find(params[:id])
     render :edit
   end
 
@@ -27,13 +27,13 @@ class SubsController < ApplicationController
     if @sub.save
       redirect_to sub_url(@sub)
     else
-      flash.new[:notice] = @sub.errors.full_messages
+      flash.now[:notice] = @sub.errors.full_messages
       render :new
     end
   end
 
   def update
-    @sub = current_user.subs.find(params[:id])
+    @sub = Sub.find(params[:id])
     if @sub.update(sub_params)
       redirect_to sub_url(@sub)
     else
@@ -43,7 +43,7 @@ class SubsController < ApplicationController
   end
 
   def destroy
-    @sub = current_user.subs.find(params[:id])
+    @sub = Sub.find(params[:id])
     @sub.destroy
   end
 
@@ -53,7 +53,7 @@ class SubsController < ApplicationController
   end
 
   def require_moderator!
-    mod_id = current_user.subs.find(params[:id]).moderator_id
+    mod_id = Sub.find(params[:id]).moderator_id
     redirect_to subs_url unless current_user.id == mod_id
   end
 end
